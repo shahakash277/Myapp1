@@ -1,0 +1,68 @@
+/* Empty. Add your own CSS if you like */
+/* Empty. Add your own CSS if you like */
+/* Empty. Add your own CSS if you like */
+.app-icon {
+    background:url("../img/ionic.png ");
+    border-radius: 0%;
+    height: 150px;
+    margin: 0 auto;
+    width: 200px;
+ background-repeat: no-repeat;
+ background-position: center;
+ background-size: contain;
+}
+
+.title-image {
+    margin-top: 8px;
+    height: 30px;
+    width: 40px;
+}
+input.ng-invalid.ng-dirty{
+  border: 1px solid red;
+}
+.tabs-top >.tabs, .tabs.tabs-top
+{
+    top: 0 !important;
+}
+.popover { height:200px; width: 160px; }
+.popover.active{
+  background:none !important;
+  border: 0;
+  border-radius: 0px;
+  box-shadow: 0 0px 0px rgba(0, 0, 0, 0);
+  /*box-shadow: 0 2px 6px rgba(0, 0, 0, 0.12 */
+
+
+}
+
+.popover .item {
+    color: #4d4d4d;
+    font-family: sans-serif;
+    background: none;
+}
+
+.pop.item .icon {
+   font-size: 20px;
+}
+
+
+.menu .bar.bar-header.expanded {
+    background-image: url('../img/material-graphite.jpg');
+    background-size: 120%;
+    background-position: 0%;
+    transition: all .5s ease-in-out;
+}
+
+.menu.menu-left * {
+    font-weight: bold;
+}
+
+.menu-open .ion-navicon {
+    transform: rotate(-360deg);
+    -webkit-transition: all 0.2s ease-in-out;
+    transition: all 0.2s ease-in-out;
+}
+
+.headimg {
+  margin-left: 50px;
+}

@@ -1,0 +1,30 @@
+<ion-view view-title="login" id="login">
+  <ion-content class="padding">
+    <div class="app-icon"></div>
+
+
+    <form name="loginForm" class="list" id="login-form1" novalidate>
+    <ion-list id="login-list" >
+       <label class="item item-input item-floating-label padding-right">
+       <span class="input-label"t>Email Id </span> <span style="color:red;" ng-show="loginForm.email1.$dirty && loginForm.email1.$error.required">required</span>
+ <span style="color:red;" ng-show="loginForm.email1.$dirty && loginForm.email1.$error.email">invalid Email</span>
+
+       <input type="email"  name="email1" ng-model="user.email" placeholder="Enter a Email ID" required>
+
+
+       </label>
+
+       <label class="item item-input item-floating-label">
+       <span class="input-label">Password</span>
+        <span style="color:red;" ng-show="loginForm.pass.$dirty && loginForm.pass.$error.required">required</span>
+       <input type="password" name="pass" ng-model="user.password" placeholder="Enter a Password" required="">
+       </label>
+    </div>
+    <button ng-click="loginEmail(loginForm,user)" ng-disabled="loginForm.$invalid" class="button button-block button-positive">Login</button>
+    <br/>
+    <button class="button button-block button-positive" ng-click="loginGmail()">Google Login</button>
+    <button class="button button-block button-positive" ng-click="things()">Google Login</button>
+
+  </form>
+  </ion-content>
+</ion-view>

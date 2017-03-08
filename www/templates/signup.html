@@ -1,0 +1,39 @@
+<ion-view view-title="signup" id="signup">
+  <ion-content class="padding">
+    <div class="app-icon"></div>
+
+
+    <form name="signupForm" class="list" id="sign-form1" novalidate>
+    <ion-list id="sign-list" >
+
+      <label class="item item-input item-floating-label">
+      <span class="input-label">First Name</span>
+       <span style="color:red;" ng-show="signupForm.fname.$dirty && signupForm.fname.$error.required">required</span>
+      <input type="text" name="fname" ng-model="user.fname" placeholder="Enter a First Name" required>
+      </label>
+
+      <label class="item item-input item-floating-label">
+      <span class="input-label">Last Name</span>
+       <span style="color:red;" ng-show="signupForm.lname.$dirty && signupForm.lname.$error.required">required</span>
+      <input type="text" name="lname" ng-model="user.lname" placeholder="Enter a last Name" required>
+      </label>
+
+       <label class="item item-input item-floating-label padding-right">
+       <span class="input-label"t>Email Id </span>
+       <span style="color:red;" ng-show="signupForm.email1.$dirty && signupForm.email1.$error.required">required</span>
+       <span style="color:red;" ng-show="signupForm.email1.$dirty && signupForm.email1.$error.email">invalid Email</span>
+       <input type="email"  name="email1" ng-model="user.email" placeholder="Enter a Email ID" required>
+       </label>
+
+       <label class="item item-input item-floating-label">
+       <span class="input-label">Password</span>
+        <span style="color:red;" ng-show="signupForm.pass.$dirty && signupForm.pass.$error.required">required</span>
+        <span style="color:red;" ng-show="signupForm.pass.$dirty && signupForm.pass.$error.minlength">mininum length must be 6 letter</span>
+       <input type="password" name="pass" ng-model="user.password" maxlength="20" minlength="6" placeholder="Enter a Password" required="">
+       </label>
+    </div>
+    <button ng-click="signUpEmail(loginForm,user)" ng-disabled="signupForm.$invalid" class="button button-block button-positive">signup</button>
+
+  </form>
+  </ion-content>
+</ion-view>

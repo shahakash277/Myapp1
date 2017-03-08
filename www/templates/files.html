@@ -1,0 +1,11 @@
+<ion-view view-title="{{title}}">
+  <ion-content>
+    <div class="row text-center" style="flex-wrap: wrap">
+      <div class="col col-25"  ng-repeat="item in items">
+      <img ng-src="{{item.fileurl}}"  style="width:90%"/>
+        <br />
+        <span style="text-center">{{item.title}}</span>
+      </div>
+    </div>
+  </ion-content>
+</ion-view>
