@@ -2,7 +2,7 @@ angular.module('starter.services', ['firebase'])
 .factory('fireBaseData', function($firebase,$rootScope) {
   var ref=new Firebase("https://ionicdocumentcloud.firebaseio.com/"),
     refUser= new Firebase("https://ionicdocumentcloud.firebaseio.com/users"),
-    reffile=new Firebase("https://ionicdocumentcloud.firebaseio.com/"+$rootScope.uid+"/category/");
+    refcategory=new Firebase("https://ionicdocumentcloud.firebaseio.com/"+$rootScope.uid+"/category/");
   return {
     ref:function(){
         return ref;
@@ -10,22 +10,23 @@ angular.module('starter.services', ['firebase'])
     refUser:function(){
         return refUser;
     },
-    reffile:function(){
-        return reffile;
+    reffiles:function(catid){
+      reffiles= refcategory.child(catid).child("files");
+        return reffiles;
     }
   }
 })
 
-.factory('firebaseFile', ['$firebase','fireBaseData','$firebaseArray',function($rootScope,fireBaseData,$firebaseArray){
-var files={};
-files.getfiles=function(catid)
-  {
-  var reffile1=new Firebase("https://ionicdocumentcloud.firebaseio.com/"+$rootScope.uid+"/category/"+catid);
+.factory('firebaseFile',function($rootScope,fireBaseData,$firebaseArray){
+return{
+  getfiles:function(catid){
+  //  var reffile1=new Firebase("https://ionicdocumentcloud.firebaseio.com/"+$rootScope.uid+"/category/"+catid+"/files");
+      var reffile1= fireBaseData.reffiles(catid);
+      return $firebaseArray(reffile1);
+  }
+}
+})
 
-    files.items= $firebaseArray(reffile1);
-  };
-return files;
-}])
 .factory('sharedUtils',['$ionicLoading','$ionicPopup', function($ionicLoading,$ionicPopup){
 
 

@@ -1,6 +1,6 @@
 angular.module('starter.controllers', ['firebase'])
 
-.controller('ctrllogin',function($scope,$rootScope, $http, $ionicLoading, $location,$ionicHistory,$state,$ionicSideMenuDelegate, $cordovaToast,sharedUtils,$cordovaOauth){
+.controller('ctrllogin',function($scope,$rootScope,$state, $cordovaToast,sharedUtils){
   $rootScope.extras=false;
 
   $scope.loginEmail= function($formName,cred){
@@ -24,14 +24,10 @@ angular.module('starter.controllers', ['firebase'])
         $cordovaToast.show("Data not Valid", 'long', 'bottom');
     }
   };
-
-$http.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded';
-  $scope.loginGmail=function() {
     //var clientId="128570300655-3g34aacplssshc7j35me663s403ipofm.apps.googleusercontent.com";
+    $scope.loginGmail=function() {
   //  com.googleusercontent.apps.mfopi304s366em53j7chssslpcaa43g3-556003075821
-      $ionicLoading.show({
-        template: 'Logging in...'
-      });
+    sharedUtils.showLoading();
       window.plugins.googleplus.login(
         {},
         function (user_data) {
@@ -44,17 +40,16 @@ $http.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded
             accessToken: user_data.accessToken,
             idToken: user_data.idToken
           });
-          $ionicLoading.hide();
+          sharedUtils.showLoading();
           $state.go('app.albums');
         },
         function (msg) {
-          $ionicLoading.hide();
+        sharedUtils.hideLoading();
             console.log(msg);
         }
       );
   };
 $scope.things=function(){
-alert('suceess');
 fileChooser.open(function(uri) {
     alert(uri);
 });
@@ -96,7 +91,7 @@ fireBaseData.ref().child($rootScope.uid).set({
 };
 })
 
-.controller('ctrlalbums',function($scope,$rootScope,$state,fireBaseData,$firebaseArray,sharedUtils,$ionicPopover)
+.controller('ctrlalbums',function($scope,$rootScope,$state,fireBaseData,$firebaseArray,sharedUtils,$ionicPopover,$ionicActionSheet)
 {
   if($rootScope.uid==null)
   {
@@ -117,6 +112,25 @@ $ionicPopover.fromTemplateUrl('templates/popover.html', {
       $state.go('app.files',{catid:catid,catname:catname});
 
   };
+
+$scope.optionmenu=function(catid,catname){
+
+  $ionicActionSheet.show({
+      titleText: catname,
+      buttons: [
+        { text: '<i class="icon ion-edit "></i> Rename' },
+        { text: '<i class="icon ion-trash-b"></i>	 Delete' },
+        { text: '<i class="icon ion-information"></i>	 Information' }
+      ],
+      buttonClicked: function(index) {
+        console.log('BUTTON CLICKED', index);
+
+        return true;
+      }
+    })
+  };
+
+
 })
 
 .controller('AppCtrl', function($scope,$rootScope,$state) {
@@ -142,10 +156,8 @@ $ionicPopover.fromTemplateUrl('templates/popover.html', {
 })
 
 
-.controller('Fileview', function($scope, $stateParams,$firebaseArray,$firebase,$rootScope) {
+.controller('Fileview', function($scope, $stateParams,$firebaseArray,$firebase,$rootScope,firebaseFile) {
   $scope.catid=$stateParams.catid;
   $scope.title=$stateParams.catname;
-  //console.log($routeParams.param);
-  var reffile1=new Firebase("https://ionicdocumentcloud.firebaseio.com/"+$rootScope.uid+"/category/"+$scope.catid+"/files");
-    $scope.items= $firebaseArray(reffile1);
+  $scope.items = firebaseFile.getfiles($scope.catid);
 });
